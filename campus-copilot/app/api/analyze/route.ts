@@ -1,9 +1,16 @@
 import { GoogleGenAI } from "@google/genai";
 import { NextResponse } from "next/server";
 
+
+
 const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
 
-// this tells gemini what the json should look like
+
+console.log(
+  "Gemini API key loaded:",
+  !!process.env.GEMINI_API_KEY
+);
+
 const schema = {
   type: "object",
   properties: {
@@ -70,7 +77,7 @@ export async function POST(request: Request) {
     const formData = await request.formData();
     const file = formData.get("file");
 
-    // check if file is there and is a pdf
+   
     if (!(file instanceof File)) {
       return NextResponse.json({ error: "No PDF file provided" }, { status: 400 });
     }
@@ -78,7 +85,6 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Only PDF files are supported" }, { status: 400 });
     }
 
-    // convert pdf to base64 so we can send it to gemini
     const bytes = await file.arrayBuffer();
     const base64 = Buffer.from(bytes).toString("base64");
 

@@ -22,7 +22,7 @@ export default function Home() {
   const [answer, setAnswer] = useState<any>(null); // result from gemin
   const [checking, setChecking] = useState(false);
 
-  // sends the file to back-end
+
   async function analyzeFile() {
     if (!file) {
       setMessage("Please select a PDF first.");
@@ -55,7 +55,7 @@ export default function Home() {
     setLoading(false);
   }
 
-  // sends student detals + scholarship info to gemni
+  // sends student detals + scholaship info to gemni
   async function checkEligibility() {
     if (!scholarship) return;
 
@@ -84,7 +84,7 @@ export default function Home() {
   }
 
   function updateStudent(name: string, value: string) {
-    setStudent({ ...student, [name]: value }); // keeps old values and changes only one
+    setStudent({ ...student, [name]: value }); 
   }
 
   function startAgain() {
